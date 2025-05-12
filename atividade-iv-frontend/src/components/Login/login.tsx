@@ -1,3 +1,5 @@
+import register from "../../auth/register"
+
 export default function Login() {
     return (
         <div className="w-10/12 md:w-1/2 max-w-md h-fit flex flex-col justify-center items-center bg-gray-200 p-4 gap-4 rounded-lg drop-shadow-2xl">
@@ -14,7 +16,19 @@ export default function Login() {
                 <label htmlFor="password" className="text-center w-full flex">Senha</label>
                 <input id="password" type="password" className="w-full p-2 bg-gray-300 rounded-sm"/>
             </div>
-            <button className="w-full text-white p-2 bg-green-600 hover:bg-green-700 font-bold rounded-sm transition duration-150 ease-in-out cursor-pointer">Registrar</button>
+            <button className="w-full text-white p-2 bg-green-600 hover:bg-green-700 font-bold rounded-sm transition duration-150 ease-in-out cursor-pointer" onClick={async () => {
+                const res : any = await register({
+                    name: (document.getElementById('name') as HTMLInputElement).value,
+                    email: (document.getElementById('email') as HTMLInputElement).value,
+                    password: (document.getElementById('password') as HTMLInputElement).value
+                })
+                const response = await res.json();
+                if(response.success){
+                    alert('Usuário cadastrado com sucesso!')
+                } else {
+                    alert(response.error)
+                }
+            }}>Registrar</button>
         </div>
     )
 }
