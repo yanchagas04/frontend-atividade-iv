@@ -1,4 +1,4 @@
-import { send_register } from "./utils";
+import { send_register, type registerResponse } from "./utils";
 import { validate_email, validate_form, validate_password } from "./validation";
 
 export function analyze_email() {
@@ -47,15 +47,8 @@ export async function analyze_forms() {
     const email = (document.getElementById('email') as HTMLInputElement).value;
     const password = (document.getElementById('password') as HTMLInputElement).value;
     if (validate_form(email, password)){
-        await send_register();
+        return await send_register();
     } else {
-        let aviso = document.createElement('p');
-        aviso.innerText = 'Preencha todos os campos corretamente';
-        aviso.classList.add('text-red-600');
-        aviso.id = 'aviso-formulario';
-        if (document.getElementById('aviso-formulario')) {
-            document.getElementById('aviso-formulario')?.remove();
-        }
-        document.getElementById('div-login')?.appendChild(aviso);
+        return {msg: 'Formulário inválido', success: false} as registerResponse
     }
 }
