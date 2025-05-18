@@ -2,6 +2,7 @@ import { toast, ToastContainer, type ToastOptions} from "react-toastify";
 import { analyze_email, analyze_forms, analyze_password } from "./analyze";
 import { Link } from "react-router-dom";
 import { storeToken } from "../../auth/token";
+import { storeUser, type User } from "../../auth/user";
 
 export default function LoginForm() {
     const notify = (msg: string, type: ToastOptions['type']) => toast(msg, {
@@ -44,6 +45,7 @@ export default function LoginForm() {
                 if (response.success) {
                     notify(response.msg, 'success');
                     storeToken(response.token);
+                    storeUser(response.data as User);
                     window.location.href = '/' + response.data.id;
                 } else {
                     notify(response.msg, 'error');
