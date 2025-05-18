@@ -1,4 +1,4 @@
-import { send_register, type registerResponse } from "../../controllers/login/loginController";
+import { send_register, type registerResponse } from "../../controllers/register/registerController";
 import { validate_email, validate_form, validate_password } from "../../Utils/validation";
 
 export function analyze_email() {

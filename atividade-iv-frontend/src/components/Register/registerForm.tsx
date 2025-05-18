@@ -1,7 +1,8 @@
 import { toast, ToastContainer, type ToastOptions} from "react-toastify";
 import { analyze_email, analyze_forms, analyze_password } from "./analyze";
+import { Link } from "react-router-dom";
 
-export default function Login() {
+export default function RegisterForm() {
     const notify = (msg: string, type: ToastOptions['type']) => toast(msg, {
         position: "bottom-center",
         autoClose: 5000,
@@ -49,7 +50,7 @@ export default function Login() {
                     notify(response.msg, 'error');
                 }
             }}>Registrar</button>
-            <a href="/" className="w-full text-center hover:text-gray-700 transition-all duration-150 ease-in-out">Já tem uma conta? Clique aqui para logar.</a>
+            <Link to="/register" className="w-full text-center hover:text-gray-700 transition-all duration-150 ease-in-out">Ainda não tem uma conta? Clique aqui para se registrar.</Link>
             <ToastContainer />
         </div>
     )
