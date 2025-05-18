@@ -48,7 +48,7 @@ export default function FormFilme(props: {id: string, close: () => void}) {
                 } else {
                     notify(response.msg, 'error')
                 }
-            }}>Entrar</button>
+            }}>Criar</button>
             <button className="w-full text-white p-2 bg-red-600 hover:bg-red-700 font-bold rounded-sm transition duration-150 ease-in-out cursor-pointer hover:scale-[102%]" onClick={props.close}>Fechar</button>
         </div>
     )
