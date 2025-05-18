@@ -1,21 +1,21 @@
-import register from "../../auth/register";
+import login from "../../auth/login";
 
-export type registerResponse = {
+export type loginResponse = {
     success: boolean,
+    token: string,
     msg: string
 }
 
-export async function send_register() {
-    const res : any = await register({
-        name: (document.getElementById('name') as HTMLInputElement).value,
-        email: (document.getElementById('email') as HTMLInputElement).value,
-        password: (document.getElementById('password') as HTMLInputElement).value
+export async function send_login(email: string, password: string) {
+    const res : any = await login({
+        email: email,
+        password: password
     })
     const response = await res.json();
     console.log(response);
     if(response.success){
-        return {msg: "Usuário cadastrado com sucesso", success: response.success} as registerResponse
+        return {msg: "Usuário logado com sucesso", success: response.success, token: response.token} as loginResponse
     } else {
-        return {msg: response.error, success: response.success} as registerResponse
+        return {msg: response.error, success: response.success, token: "No Token"} as loginResponse
     }
 }

@@ -46,8 +46,9 @@ export function analyze_password() {
 export async function analyze_forms() {
     const email = (document.getElementById('email') as HTMLInputElement).value;
     const password = (document.getElementById('password') as HTMLInputElement).value;
+    const name = (document.getElementById('name') as HTMLInputElement).value;
     if (validate_form(email, password)){
-        return await send_register();
+        return await send_register(name, email, password);
     } else {
         return {msg: 'Formulário inválido', success: false} as registerResponse
     }

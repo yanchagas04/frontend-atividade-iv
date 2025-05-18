@@ -50,7 +50,7 @@ export default function RegisterForm() {
                     notify(response.msg, 'error');
                 }
             }}>Registrar</button>
-            <Link to="/register" className="w-full text-center hover:text-gray-700 transition-all duration-150 ease-in-out">Ainda não tem uma conta? Clique aqui para se registrar.</Link>
+            <Link to="/login" className="w-full text-center hover:text-gray-700 transition-all duration-150 ease-in-out">Já tem uma conta? Clique aqui para logar.</Link>
             <ToastContainer />
         </div>
     )

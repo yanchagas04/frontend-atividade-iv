@@ -1,6 +1,7 @@
 import { toast, ToastContainer, type ToastOptions} from "react-toastify";
 import { analyze_email, analyze_forms, analyze_password } from "./analyze";
 import { Link } from "react-router-dom";
+import { storeToken } from "../../auth/token";
 
 export default function LoginForm() {
     const notify = (msg: string, type: ToastOptions['type']) => toast(msg, {
@@ -42,6 +43,7 @@ export default function LoginForm() {
                 console.log(response);
                 if (response.success) {
                     notify(response.msg, 'success');
+                    storeToken(response.token);
                 } else {
                     notify(response.msg, 'error');
                 }
