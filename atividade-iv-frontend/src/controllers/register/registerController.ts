@@ -5,11 +5,11 @@ export type registerResponse = {
     msg: string
 }
 
-export async function send_register() {
+export async function send_register(name: string, email: string, password: string) {
     const res : any = await register({
-        name: (document.getElementById('name') as HTMLInputElement).value,
-        email: (document.getElementById('email') as HTMLInputElement).value,
-        password: (document.getElementById('password') as HTMLInputElement).value
+        name: name,
+        email: email,
+        password: password
     })
     const response = await res.json();
     console.log(response);

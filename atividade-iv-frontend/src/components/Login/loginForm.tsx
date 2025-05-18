@@ -1,7 +1,9 @@
 import { toast, ToastContainer, type ToastOptions} from "react-toastify";
 import { analyze_email, analyze_forms, analyze_password } from "./analyze";
+import { Link } from "react-router-dom";
+import { storeToken } from "../../auth/token";
 
-export default function Login() {
+export default function LoginForm() {
     const notify = (msg: string, type: ToastOptions['type']) => toast(msg, {
         position: "bottom-center",
         autoClose: 5000,
@@ -22,11 +24,7 @@ export default function Login() {
             <div className="w-full h-fit flex flex-col justify-center items-center gap-2">
 
                 <svg  xmlns="http://www.w3.org/2000/svg"  width={64}  height={64}  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  strokeWidth={2}  strokeLinecap="round"  strokeLinejoin="round"  className="icon icon-tabler icons-tabler-outline icon-tabler-movie"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z" /><path d="M8 4l0 16" /><path d="M16 4l0 16" /><path d="M4 8l4 0" /><path d="M4 16l4 0" /><path d="M4 12l16 0" /><path d="M16 8l4 0" /><path d="M16 16l4 0" /></svg>
-                <h1 className="text-3xl font-bold w-fit">Novo Usuário</h1>
-            </div>
-            <div className="w-full h-fit flex flex-col justify-center items-center gap-1">
-                <label htmlFor="name" className="text-center w-full flex">Nome</label>
-                <input id="name" type="text" className="w-full p-2 bg-gray-300 rounded-sm"/>
+                <h1 className="text-3xl font-bold w-fit">Login</h1>
             </div>
             <div id="div-email" className="w-full h-fit flex flex-col justify-center items-center gap-1">
                 <label htmlFor="email" className="text-center w-full flex">Email</label>
@@ -45,11 +43,12 @@ export default function Login() {
                 console.log(response);
                 if (response.success) {
                     notify(response.msg, 'success');
+                    storeToken(response.token);
                 } else {
                     notify(response.msg, 'error');
                 }
-            }}>Registrar</button>
-            <a href="/" className="w-full text-center hover:text-gray-700 transition-all duration-150 ease-in-out">Já tem uma conta? Clique aqui para logar.</a>
+            }}>Entrar</button>
+            <Link to="/register" className="w-full text-center hover:text-gray-700 transition-all duration-150 ease-in-out">Ainda não tem uma conta? Clique aqui para se registrar.</Link>
             <ToastContainer />
         </div>
     )

@@ -1,12 +1,8 @@
-import Login from "./components/Login/login"
+import Router from "./components/Router/router"
 
 function App() {
   return (
-    <>
-      <div className="w-screen h-screen flex justify-center items-center bg-gradient-to-br from-blue-600 to-blue-900">
-        <Login />
-      </div>
-    </>
+    <Router />
   )
 }
 

@@ -1,4 +1,4 @@
-import { send_login, type loginResponse } from "../../controllers/login/loginController";
+import { send_register, type registerResponse } from "../../controllers/register/registerController";
 import { validate_email, validate_form, validate_password } from "../../Utils/validation";
 
 export function analyze_email() {
@@ -46,9 +46,10 @@ export function analyze_password() {
 export async function analyze_forms() {
     const email = (document.getElementById('email') as HTMLInputElement).value;
     const password = (document.getElementById('password') as HTMLInputElement).value;
+    const name = (document.getElementById('name') as HTMLInputElement).value;
     if (validate_form(email, password)){
-        return await send_login(email, password);
+        return await send_register(name, email, password);
     } else {
-        return {msg: 'Formulário inválido', success: false} as loginResponse
+        return {msg: 'Formulário inválido', success: false} as registerResponse
     }
 }
