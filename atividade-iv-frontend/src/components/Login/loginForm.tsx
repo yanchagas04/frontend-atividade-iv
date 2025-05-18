@@ -44,6 +44,7 @@ export default function LoginForm() {
                 if (response.success) {
                     notify(response.msg, 'success');
                     storeToken(response.token);
+                    window.location.href = '/' + response.data.id;
                 } else {
                     notify(response.msg, 'error');
                 }
