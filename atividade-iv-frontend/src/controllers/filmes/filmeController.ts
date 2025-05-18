@@ -1,4 +1,5 @@
 import criarFilme from "../../auth/filmes/createFilme";
+import deletarFilme from "../../auth/filmes/deletarFilme";
 import pegarFilmes from "../../auth/filmes/getFilmes";
 import type { FilmePost } from "../../models/filmes/filme";
 
@@ -33,5 +34,16 @@ export async function getFilmes(userId: string) {
         return {msg: "Filmes obtidos com sucesso", success: response.success, filmes: response.filmes} as filmesResponse
     } else {
         return {msg: response.error, success: response.success} as filmesResponse
+    }
+}
+
+export async function deleteFilme(id: string) {
+    const res = await deletarFilme(id)
+    const response = await res.json();
+    console.log(response);
+    if(response.success){
+        return {msg: "Filme deletado com sucesso", success: response.success} as filmeResponse
+    } else {
+        return {msg: response.error, success: response.success} as filmeResponse
     }
 }
