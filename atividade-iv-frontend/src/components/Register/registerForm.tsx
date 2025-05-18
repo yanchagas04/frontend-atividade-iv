@@ -46,6 +46,7 @@ export default function RegisterForm() {
                 console.log(response);
                 if (response.success) {
                     notify(response.msg, 'success');
+                    window.location.href = '/login';
                 } else {
                     notify(response.msg, 'error');
                 }
