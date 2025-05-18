@@ -1,17 +1,53 @@
 import { useParams } from "react-router-dom"
-import type { FilmePost } from "../../models/filmes/filme"
-import { createFilme, deleteFilme, getFilmes } from "../../controllers/filmes/filmeController"
-import pegarFilmes from "../../auth/filmes/getFilmes"
+import { Header } from "../../components/AreaLogada/header"
+import { ListaFilmes } from "../../components/AreaLogada/listaFilmes"
+import type { Filme } from "../../models/filmes/filme"
+import { useEffect, useState } from "react"
+import { getFilmes } from "../../controllers/filmes/filmeController"
+import FormFilme from "../../components/AreaLogada/formFilme"
+
+const filmes : Filme[] = [
+    {
+        id: "1",
+        title: "Filme 1",
+        description: "Descrição do filme 1",
+        watched: false
+    },
+    {
+        id: "2",
+        title: "Filme 2",
+        description: "Descrição do filme 2",
+        watched: false
+    },
+    {
+        id: "3",
+        title: "Filme 3",
+        description: "Descrição do filme 3",
+        watched: false
+    }
+]
 
 export default function AreaLogada() {
     const id = useParams().id as string
+    const [filmes, setFilmes] = useState<Filme[]>([]);
+    const [openModal, setOpenModal] = useState(false);
+    useEffect(() => {
+        const awaitgetFilmes = async (id: string) => {
+            const filmes = (await getFilmes(id)).filmes;
+            setFilmes(filmes as Filme[]);
+        }
+        awaitgetFilmes(id);
+    }, [filmes])
     return (
-        <div>
-            <h1>Area logada {id}</h1>
-            <button className="bg-blue-500 p-2 text-white" onClick={async () => {
-                const res = await deleteFilme("21d29916-9370-4e0d-be9d-51b9247d0ff5")
-                console.log(res)
-            }}>teste filme</button>
+        <div className="flex flex-col w-full min-h-screen bg-gradient-to-b from-gray-300 from-75% to-gray-400 gap-4">
+            <Header/>
+            <ListaFilmes filmes={filmes} />
+            <button className="w-16 h-16 flex justify-center items-center rounded-full fixed bottom-4 right-4 bg-gradient-to-r from-blue-400 to-blue-800 transition-all duration-300 ease-in-out hover:scale-110" onClick={() => {
+                setOpenModal(true)
+            }}>
+                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#EFEFEF"><path d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"/></svg>
+            </button>
+            {openModal && <FormFilme id={id} close={() => {setOpenModal(false)}}/>}
         </div>
     )
 }
