@@ -1,6 +1,6 @@
 import { toast, ToastContainer, type ToastOptions} from "react-toastify";
 import { analyze_email, analyze_forms, analyze_password } from "./analyze";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { storeToken } from "../../auth/token";
 
 export default function LoginForm() {

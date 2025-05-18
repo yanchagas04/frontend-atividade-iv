@@ -6,27 +6,6 @@ import { useEffect, useState } from "react"
 import { getFilmes } from "../../controllers/filmes/filmeController"
 import FormFilme from "../../components/AreaLogada/formFilme"
 
-const filmes : Filme[] = [
-    {
-        id: "1",
-        title: "Filme 1",
-        description: "Descrição do filme 1",
-        watched: false
-    },
-    {
-        id: "2",
-        title: "Filme 2",
-        description: "Descrição do filme 2",
-        watched: false
-    },
-    {
-        id: "3",
-        title: "Filme 3",
-        description: "Descrição do filme 3",
-        watched: false
-    }
-]
-
 export default function AreaLogada() {
     const id = useParams().id as string
     const [filmes, setFilmes] = useState<Filme[]>([]);
